@@ -1,7 +1,1 @@
-export function validate_dpe() {
-  return [
-    {
-      error: 'ERROR'
-    }
-  ];
-}
+export { DpeValidator } from './validator/domain/validate-dpe.service.js';
