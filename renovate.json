@@ -1,6 +1,13 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ]
+  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
+  "timezone": "Europe/Paris",
+  "schedule": ["before 3am on the first day of the month"],
+  "prHourlyLimit": 30,
+  "automerge": false,
+  "automergeType": "branch",
+  "major": {
+    "automerge": false
+  },
+  "recreateClosed": true,
+  "ignoreDeprecated": false
 }
