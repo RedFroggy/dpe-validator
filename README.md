@@ -28,7 +28,7 @@ This Javascript library provide some utilities to valide a DPE
 - 2 error levels will be reported:
   - **warning** for non-blocking errors allowing all or part of the DPE to be analyzed
   - **error** for blocking errors in data analysis (for example if no walls are present)
-- 2 versions of the same DPEs can be analyzed in order to detect anomalies by comparing the data (for example window name which changes between the 2 versions)
+- 2 versions of the same DPEs can be analyzed in order to detect anomalies by comparing the data (for example window number which changes between the 2 versions)
 
 ## How to use it
 
@@ -53,6 +53,45 @@ DpeValidator.validate({
     "level": "WARNING"
   }
 ]
+```
+
+- Two dpe can be compared analyzed based on their json :
+
+```javascript
+import { DpeComparator } from 'dpe-comparator';
+
+DpeComparator.compare(
+  {
+    mur_collection: [{}, {}],
+    logement: {
+      caracteristique_generale: {
+        annee_construction: 1948
+      }
+    }
+  },
+  {
+    mur_collection: [{}],
+    logement: {
+      caracteristique_generale: {
+        annee_construction: 1970
+      }
+    }
+  }
+);
+```
+
+```json
+{
+  "size": {
+    "mur_collection": { "is": 2, "was": 1 }
+  },
+  "values": {
+    "annee_construction": {
+      "is": 1948,
+      "was": 1970
+    }
+  }
+}
 ```
 
 ## Getting started
