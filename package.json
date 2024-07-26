@@ -1,0 +1,74 @@
+{
+  "name": "dpevalidator",
+  "version": "0.0.0-development",
+  "description": "A Javascript library to validate a DPE",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "author": "RedFroggy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RedFroggy/dpe-validator/issues"
+  },
+  "keywords": [
+    "dpe",
+    "validator",
+    "red froggy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RedFroggy/dpe-validator.git"
+  },
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "qa:lint": "eslint .",
+    "qa:lint:fix": "npm run qa:lint -- --fix",
+    "qa:duplication": "jscpd",
+    "qa:format": "prettier --plugin-search-dir . --write .",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "prepare": "husky install",
+    "assets:sync": "node scripts/synchronize_assets.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@commitlint/cz-commitlint": "^19.2.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.0.2",
+    "@types/node": "^20.12.4",
+    "@types/jest": "^29.5.12",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-check-file": "^2.7.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^3.10.2",
+    "jscpd": "^3.5.10",
+    "prettier": "^3.2.5",
+    "pretty-quick": "^4.0.0",
+    "semantic-release": "^23.0.6"
+  },
+  "jscpd": {
+    "threshold": 0.1,
+    "reporters": [
+      "console",
+      "html"
+    ],
+    "ignore": [
+      "**/*.spec.js"
+    ],
+    "path": [
+      "src"
+    ],
+    "output": "./duplicate",
+    "absolute": true,
+    "gitignore": true
+  }
+}
