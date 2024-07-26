@@ -1,11 +1,12 @@
 import { ValidationErrorCode, ValidationErrorLevel } from '../../core/domain/error.model.js';
+import { isArray } from 'node:util';
 
 export class DpeValidator {
   /**
    * @param dpe {FullDpe}
-   * @return {Promise<ValidationError[]>}
+   * @return {ValidationError[]}
    */
-  async validate(dpe) {
+  validate(dpe) {
     // Check that all enveloppes ar defined
     return this.#validateEnveloppes(dpe);
   }
@@ -19,12 +20,29 @@ export class DpeValidator {
     /** @type(ValidationError[]) **/
     const errors = [];
 
-    if (!dpe.logement.enveloppe.mur_collection) {
-      errors.push({
-        code: ValidationErrorCode.NO_MURS_COLLECTION,
-        level: ValidationErrorLevel.ERROR
-      });
-    }
+    const collections = ['mur', 'plancher_bas', 'plancher_haut', 'baie_vitree', 'porte'];
+
+    const enveloppe = dpe.logement.enveloppe;
+
+    collections.forEach((collection) => {
+      const collectionName = `${collection}_collection`;
+
+      if (
+        !enveloppe[collectionName] ||
+        !enveloppe[collectionName][collection] ||
+        !isArray(enveloppe[collectionName][collection])
+      ) {
+        errors.push({
+          code: ValidationErrorCode[`NO_${collection.toUpperCase()}`],
+          level: ValidationErrorLevel.ERROR
+        });
+      } else if (enveloppe[collectionName][collection].length === 0) {
+        errors.push({
+          code: ValidationErrorCode[`EMPTY_${collection.toUpperCase()}`],
+          level: ValidationErrorLevel.WARNING
+        });
+      }
+    });
 
     return errors;
   }
