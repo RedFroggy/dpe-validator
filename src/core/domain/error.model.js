@@ -1,4 +1,5 @@
 export const ValidationErrorCode = {
+  UNSUPPORTED_VERSION: 'UNSUPPORTED_VERSION',
   NO_MUR: 'NO_MUR',
   NO_PLANCHER_BAS: 'NO_PLANCHER_BAS',
   NO_PLANCHER_HAUT: 'NO_PLANCHER_HAUT',
@@ -12,6 +13,7 @@ export const ValidationErrorCode = {
 };
 
 export const ValidationErrorLevel = {
+  FATAL: 'FATAL',
   ERROR: 'ERROR',
   WARNING: 'WARNING'
 };

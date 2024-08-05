@@ -1,5 +1,4 @@
 import { ValidationErrorCode, ValidationErrorLevel } from '../../core/domain/error.model.js';
-import { isArray } from 'node:util';
 
 export class DpeValidator {
   /**
@@ -24,13 +23,24 @@ export class DpeValidator {
 
     const enveloppe = dpe.logement.enveloppe;
 
+    if (Number(dpe.administratif.enum_modele_dpe_id) !== 1) {
+      errors.push({
+        code: ValidationErrorCode.UNSUPPORTED_VERSION,
+        level: ValidationErrorLevel.FATAL,
+        metadata: {
+          detectedVersion: dpe.administratif.enum_modele_dpe_id,
+          expectedVersion: '1'
+        }
+      });
+    }
+
     collections.forEach((collection) => {
       const collectionName = `${collection}_collection`;
 
       if (
         !enveloppe[collectionName] ||
         !enveloppe[collectionName][collection] ||
-        !isArray(enveloppe[collectionName][collection])
+        !Array.isArray(enveloppe[collectionName][collection])
       ) {
         errors.push({
           code: ValidationErrorCode[`NO_${collection.toUpperCase()}`],

@@ -1,5 +1,6 @@
 import { DpeValidator } from './validate-dpe.service.js';
 import { DpeDataFixture } from '../../../tests/fixtures/dpe/dpe.fixture.js';
+import { ValidationErrorCode, ValidationErrorLevel } from '../../core/domain/error.model.js';
 
 describe('Dpe validator tests', () => {
   const service = new DpeValidator();
@@ -11,6 +12,25 @@ describe('Dpe validator tests', () => {
 
     const errors = service.validate(dpe);
     expect(errors).toStrictEqual([]);
+  });
+
+  it('should return error for an unsupported dpe model version', async () => {
+    const service = new DpeValidator();
+
+    const dpe = DpeDataFixture.aFullDpe();
+    dpe.administratif.enum_modele_dpe_id = '3';
+
+    const errors = service.validate(dpe);
+    expect(errors).toStrictEqual([
+      {
+        code: ValidationErrorCode.UNSUPPORTED_VERSION,
+        level: ValidationErrorLevel.FATAL,
+        metadata: {
+          detectedVersion: '3',
+          expectedVersion: '1'
+        }
+      }
+    ]);
   });
 
   it.each(['mur', 'plancher_bas', 'plancher_haut', 'baie_vitree', 'porte'])(

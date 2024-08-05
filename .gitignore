@@ -3,3 +3,4 @@
 /duplicate/
 /coverage/
 .npmrc
+*.iml

@@ -38,7 +38,7 @@ This Javascript library provide some utilities to valide a DPE
 ```javascript
 import { DpeValidator } from 'dpe-validator';
 
-DpeValidator.validate({
+new DpeValidator().validate({
     numero_dpe: "2344E0308327N",
     statut: "ACTIF",
     administratif: {...},
@@ -60,7 +60,7 @@ DpeValidator.validate({
 ```javascript
 import { DpeComparator } from 'dpe-comparator';
 
-DpeComparator.compare(
+new DpeComparator().compare(
   {
     mur_collection: [{}, {}],
     logement: {
