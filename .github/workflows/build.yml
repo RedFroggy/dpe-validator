@@ -48,4 +48,5 @@ jobs:
         run: |
           cp package.json src/
           cp README.md src/
+          cp index.d.ts src/
           npm run release -- --r git@github.com:RedFroggy/dpe-validator.git
