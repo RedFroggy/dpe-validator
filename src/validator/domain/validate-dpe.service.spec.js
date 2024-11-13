@@ -26,8 +26,8 @@ describe('Dpe validator tests', () => {
         code: ValidationErrorCode.UNSUPPORTED_VERSION,
         level: ValidationErrorLevel.FATAL,
         metadata: {
-          detectedVersion: '3',
-          expectedVersion: '1'
+          originalValue: '3',
+          expectedValue: '1'
         }
       }
     ]);

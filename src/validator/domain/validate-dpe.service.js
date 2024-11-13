@@ -28,8 +28,8 @@ export class DpeValidator {
         code: ValidationErrorCode.UNSUPPORTED_VERSION,
         level: ValidationErrorLevel.FATAL,
         metadata: {
-          detectedVersion: dpe.administratif.enum_modele_dpe_id,
-          expectedVersion: '1'
+          originalValue: dpe.administratif.enum_modele_dpe_id,
+          expectedValue: '1'
         }
       });
     }
