@@ -24,7 +24,7 @@ describe('Dpe validator tests', () => {
     expect(errors).toStrictEqual([
       {
         code: ValidationErrorCode.UNSUPPORTED_VERSION,
-        level: ValidationErrorLevel.FATAL,
+        level: ValidationErrorLevel.ERROR,
         metadata: {
           originalValue: '3',
           expectedValue: '1'
