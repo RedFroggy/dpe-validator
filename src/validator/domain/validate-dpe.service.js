@@ -26,7 +26,7 @@ export class DpeValidator {
     if (Number(dpe.administratif.enum_modele_dpe_id) !== 1) {
       errors.push({
         code: ValidationErrorCode.UNSUPPORTED_VERSION,
-        level: ValidationErrorLevel.FATAL,
+        level: ValidationErrorLevel.ERROR,
         metadata: {
           originalValue: dpe.administratif.enum_modele_dpe_id,
           expectedValue: '1'
